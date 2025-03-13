@@ -4,7 +4,7 @@ use warnings;
 use Quota;
 
 # Define the filesystem and users with their new quotas
-my $filesystem = '/dev/sda5';
+my $filesystem = '/';
 my %user_quotas = (
     'manolito' => { blocks_soft => 2000, blocks_hard => 2200, inodes_soft => 50, inodes_hard => 60 },
     'manolita' => { blocks_soft => 1500, blocks_hard => 1700, inodes_soft => 40, inodes_hard => 50 },
