@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use Excel::Writer::XLSX;
+use Email::Send::SMTP::Gmail;
 
 # Declarar arrays
 my (@nombres, @porcentajes);
@@ -41,3 +42,22 @@ $chart->add_series(
 $workbook->close();
 
 print "Gráfico generado en chart.xlsx\n";
+
+# Enviar el archivo por correo
+my ($mail,$error) = Email::Send::SMTP::Gmail->new(
+    -smtp  => 'smtp.gmail.com',
+    -login => 'gutipanaderia@gmail.com',
+    -pass  => 'gaazvqcpezrzimtv'
+);
+print "session error: $error" unless ($mail != -1);
+
+$mail->send(
+    -to          => 'juancalzada@usal.es',
+    -subject     => 'Hello!',
+    -body        => 'Just testing it',
+    -attachments => 'chart.xlsx'
+);
+
+$mail->bye;
+
+print "Correo enviado con el archivo chart.xlsx\n";
